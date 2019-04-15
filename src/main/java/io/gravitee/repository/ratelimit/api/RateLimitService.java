@@ -16,6 +16,9 @@
 package io.gravitee.repository.ratelimit.api;
 
 import io.gravitee.repository.ratelimit.model.RateLimit;
+import io.reactivex.Single;
+
+import java.util.function.Supplier;
 
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
@@ -23,6 +26,9 @@ import io.gravitee.repository.ratelimit.model.RateLimit;
  */
 public interface RateLimitService {
 
+    Single<RateLimit> incrementAndGet(String key, boolean async, Supplier<RateLimit> supplier);
+
+    /*
     RateLimit get(String rateLimitKey, boolean async);
 
     void save(RateLimit rateLimit, boolean async);
@@ -34,4 +40,5 @@ public interface RateLimitService {
     default void save(RateLimit rateLimit) {
         save(rateLimit, false);
     }
+    */
 }
