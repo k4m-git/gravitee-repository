@@ -16,6 +16,7 @@
 package io.gravitee.repository.ratelimit.api;
 
 import io.gravitee.repository.ratelimit.model.RateLimit;
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 import java.util.function.Supplier;
@@ -26,7 +27,9 @@ import java.util.function.Supplier;
  */
 public interface RateLimitRepository {
 
-    Single<RateLimit> incrementAndGet(String key, Supplier<RateLimit> supplier);
+    Single<? extends RateLimit> incrementAndGet(String key, long weight, Supplier<RateLimit> supplier);
+
+    Maybe<? extends RateLimit> get(String key);
 
     /*
     RateLimit get(String rateLimitKey);

@@ -26,7 +26,11 @@ import java.util.function.Supplier;
  */
 public interface RateLimitService {
 
-    Single<RateLimit> incrementAndGet(String key, boolean async, Supplier<RateLimit> supplier);
+    Single<RateLimit> incrementAndGet(String key, long weight, boolean async, Supplier<RateLimit> supplier);
+
+    default Single<RateLimit> incrementAndGet(String key, boolean async, Supplier<RateLimit> supplier) {
+        return incrementAndGet(key, 1, async, supplier);
+    }
 
     /*
     RateLimit get(String rateLimitKey, boolean async);
