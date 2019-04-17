@@ -31,8 +31,6 @@ public class RateLimit {
 
     private long limit;
 
-    private boolean async;
-
     private String subscription;
 
     public RateLimit(String key) {
@@ -47,7 +45,6 @@ public class RateLimit {
         this(key);
         this.setCounter(rateLimit.getCounter());
         this.setLimit(rateLimit.getLimit());
-        this.setAsync(rateLimit.isAsync());
         this.setResetTime(rateLimit.getResetTime());
     }
 
@@ -69,14 +66,6 @@ public class RateLimit {
 
     public void setResetTime(long resetTime) {
         this.resetTime = resetTime;
-    }
-
-    public boolean isAsync() {
-        return async;
-    }
-
-    public void setAsync(boolean async) {
-        this.async = async;
     }
 
     public long getLimit() {
@@ -111,10 +100,9 @@ public class RateLimit {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
-        sb.append("counter=").append(counter);
-        sb.append(", key='").append(key).append('\'');
+        sb.append("key=").append(key);
+        sb.append(", counter='").append(counter).append('\'');
         sb.append(", limit=").append(limit);
-        sb.append(", async=").append(async);
         sb.append('}');
         return sb.toString();
     }
