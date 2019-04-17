@@ -25,11 +25,13 @@ import java.util.function.Supplier;
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
  */
-public interface RateLimitRepository {
+public interface RateLimitRepository<T extends RateLimit> {
 
-    Single<? extends RateLimit> incrementAndGet(String key, long weight, Supplier<RateLimit> supplier);
+    Single<T> incrementAndGet(String key, long weight, Supplier<RateLimit> supplier);
 
-    Maybe<? extends RateLimit> get(String key);
+    Maybe<T> get(String key);
+
+    Single<T> save(T rateLimit);
 
     /*
     RateLimit get(String rateLimitKey);
